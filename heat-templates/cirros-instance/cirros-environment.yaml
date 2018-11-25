@@ -1,0 +1,8 @@
+parameters:
+  image_name: cirros
+  instance_name: cirros-instance1
+  instance_flavor: m1.tiny
+  key_name: undercloud-key
+  public_net: provider
+  private_net: private1
+  private_subnet: private1-subnet1

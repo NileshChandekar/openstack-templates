@@ -1,0 +1,94 @@
+heat_template_version: 2016-10-14
+description: spawning a custom web server
+
+parameters:
+  image_name:
+    type: string
+    default: web-image
+    description: Image used for servers
+    constraints:
+      - custom_constraint: glance.image
+  instance_name:
+    type: string
+    default: web-server
+    description: Name for the web server
+  key_name:
+    type: string
+    default: web-keypair
+    description: SSH key to connect to the servers
+    constraints:
+      - custom_constraint: nova.keypair
+  instance_flavor:
+    type: string
+    default: m2.small
+    description: flavor used by the servers
+    constraints:
+      - custom_constraint: nova.flavor
+  public_net:
+    type: string
+    default: public
+    description: Name of public network into which servers get deployed
+    constraints:
+      - custom_constraint: neutron.network
+  private_net:
+    type: string
+    default: private
+    description: Name of private network into which servers get deployed
+    constraints:
+      - custom_constraint: neutron.network
+  private_subnet:
+    type: string
+    default: private_subnet
+    description: Name of private subnet into which servers get deployed
+    constraints:
+      - custom_constraint: neutron.subnet
+
+resources:
+  web_security_group:
+    type: OS::Neutron::SecurityGroup
+    properties:
+      description: Add security group rules for the multi-tier architecture
+      name: cirros-heat-template
+      rules:
+        - remote_ip_prefix: 0.0.0.0/0
+          protocol: tcp
+          port_range_min: 22
+          port_range_max: 22
+        - remote_ip_prefix: 0.0.0.0/0
+          protocol: icmp
+
+
+  web_net_port:
+    type: OS::Neutron::Port
+    properties:
+      network: { get_param: private_net }
+      fixed_ips:
+        - subnet: { get_param: private_subnet }
+      security_groups: [{ get_resource: web_security_group }]
+
+
+  web_server:
+    type: OS::Nova::Server
+    properties:
+      name: { get_param: instance_name }
+      image: { get_param: image_name }
+      flavor: { get_param: instance_flavor }
+      key_name: { get_param: key_name }
+      networks:
+        - port: { get_resource: web_net_port }
+
+
+  web_floating_ip:
+    type: OS::Neutron::FloatingIP
+    properties:
+      floating_network: { get_param: public_net }
+      port_id: { get_resource: web_net_port }
+
+outputs:
+  web_private_ip:
+    description: IP address of first web server in private network
+    value: { get_attr: [ web_server, first_address ] }
+
+  web_public_ip:
+    description: Floating IP address of the web server
+    value: { get_attr: [ web_floating_ip, floating_ip_address ] }
