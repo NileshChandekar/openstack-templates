@@ -1,0 +1,5 @@
+parameter_defaults:
+  OvercloudControllerFlavor: control
+  OvercloudComputeDVRFlavor: computedvr
+  ControllerCount: 1
+  ComputeDVRCount: 2
