@@ -1,0 +1,12 @@
+resource_registry:
+  OS::Nova::Server::Cirros: /home/stack/heat2/cirros.yaml
+
+parameter_defaults:
+  image_name: cirros   
+  instance_name: cirros-instance4
+  instance_flavor: m1.tiny   
+  key_name: undercloud-key  
+  public_net: provider 
+  private_net: private1
+  private_subnet: private1-subnet1
+
