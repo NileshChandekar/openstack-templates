@@ -1,0 +1,28 @@
+## A Heat environment file which can be used to set up storage
+## backends. Defaults to Ceph used as a backend for Cinder, Glance and
+## Nova ephemeral storage.
+parameter_defaults:
+
+  #### BACKEND SELECTION ####
+  CinderEnableIscsiBackend: false
+  CinderEnableRbdBackend: false
+  CinderEnableNfsBackend: true
+  NovaEnableRbdBackend: false
+  GlanceBackend: file
+
+  #### CINDER NFS SETTINGS ####
+  CinderNfsServers: '192.168.24.250:/home/exports/cinder'
+  CinderNfsMountOptions: 'nosharecache'
+
+
+  #### GLANCE NFS SETTINGS ####
+  GlanceNfsEnabled: true
+  GlanceNfsShare: '192.168.24.250:/home/exports/glance'
+  GlanceNfsOptions: 'intr,context=system_u:object_r:glance_var_lib_t:s0'
+
+
+  #### NOVA NFS SETTINGS ####
+  NovaNfsEnabled: false
+  NovaNfsShare: '192.168.24.250:/home/exports/nova'
+  NovaNfsOptions: 'context=system_u:object_r:nfs_t:s0'
+

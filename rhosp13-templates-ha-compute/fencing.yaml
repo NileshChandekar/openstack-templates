@@ -1,0 +1,40 @@
+parameter_defaults:
+  EnableFencing: true
+  FencingConfig:
+    devices:
+    - agent: fence_ipmilan
+      host_mac: 52:54:00:36:60:38
+      params:
+        ipaddr: 192.168.24.250
+        ipport: '6230'
+        lanplus: true
+        login: admin
+        passwd: redhat
+        privlvl: administrator
+    - agent: fence_ipmilan
+      host_mac: 52:54:00:e8:7c:5c
+      params:
+        ipaddr: 192.168.24.250
+        ipport: '6231'
+        lanplus: true
+        login: admin
+        passwd: redhat
+        privlvl: administrator
+    - agent: fence_ipmilan
+      host_mac: 52:54:00:f5:30:0a
+      params:
+        ipaddr: 192.168.24.250
+        ipport: '6232'
+        lanplus: true
+        login: admin
+        passwd: redhat
+        privlvl: administrator
+    - agent: fence_ipmilan
+      host_mac: 52:54:00:cd:1c:cf
+      params:
+        ipaddr: 192.168.24.250
+        ipport: '6233'
+        lanplus: true
+        login: admin
+        passwd: redhat
+        privlvl: administrator

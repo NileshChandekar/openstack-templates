@@ -1,0 +1,4 @@
+parameter_defaults:
+  ExtraConfig:
+    tripleo::instanceha::no_shared_storage: false
+  OvercloudComputeInstanceHAFlavor: compute-instance-ha
