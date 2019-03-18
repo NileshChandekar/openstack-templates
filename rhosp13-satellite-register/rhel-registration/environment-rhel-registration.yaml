@@ -1,0 +1,27 @@
+# Note this can be specified either in the call
+# to heat stack-create via an additional -e option
+# or via the global environment on the seed in
+# /etc/heat/environment.d/default.yaml
+parameter_defaults:
+  rhel_reg_activation_key: "RHOS13"
+  rhel_reg_auto_attach: ""
+  rhel_reg_base_url: ""
+  rhel_reg_environment: ""
+  rhel_reg_force: "True"
+  rhel_reg_machine_name: ""
+  rhel_reg_org: "RED_HAT_ECS"
+  rhel_reg_password: ""
+  rhel_reg_pool_id: "8a85f98c63842fef0163949e5f9c4be0"
+  rhel_reg_release: ""
+  rhel_reg_repos: ""
+  rhel_reg_sat_url: "http://dell-r430-17.gsslab.pnq2.redhat.com"
+  rhel_reg_server_url: ""
+  rhel_reg_service_level: ""
+  rhel_reg_user: ""
+  rhel_reg_type: ""
+  rhel_reg_method: "satellite"
+  rhel_reg_sat_repo: "rhel-7-server-openstack-13-rpms"
+  rhel_reg_http_proxy_host: ""
+  rhel_reg_http_proxy_port: ""
+  rhel_reg_http_proxy_username: ""
+  rhel_reg_http_proxy_password: ""
